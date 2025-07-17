@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Camiseta deportiva",
+    "price": 100,
+    "categories": ["ropa", "deporte"]
+  },
+  {
+    "id": 2,
+    "name": "Zapatilla Running",
+    "price": 200,
+    "categories": ["calzado", "deporte"]
+  },
+  {
+    "id": 3,
+    "name": "Mochila Escolar",
+    "price": 300,
+    "categories": ["Movhila", "escolar"]
+  },
+  {
+    "id": 4,
+    "name": "Auriculares Bluetooth",
+    "price": 400,
+    "categories": ["Tecnologia", "audio"]
+  },
+  {
+    "id": 5,
+    "name": "Botella Termica",
+    "price": 500,
+    "categories": ["Hogar", "accesorios"]
+  }
+]
