@@ -1,19 +1,6 @@
-/*import fs from "node:fs";
-import path from "node:path";
-import { db } from './data.js'
-import {collection, getDocs} from 'firebase/firestore';
-const productsCollection = collection(db,'products');
-export const getAllProducts = async () =>{
- try {
-  const snapshot = await getDocs(productsCollection);
-  return snapshot.docs.map((doc) => ({id:doc.id, ...doc.data() }));
 
- } catch (error) {
-  console.error(error);
- }
-}*/
 import { db } from '../services/firebase.js';
-
+//obtener todos los productos
 export const getAllProducts = async () => {
   try {
     const snapshot = await db.collection('products').get();
@@ -23,39 +10,96 @@ export const getAllProducts = async () => {
     }));
     return products;
   } catch (error) {
-    console.error("Error al obtener productos de Firestore:", error);
     throw error;
   }
 };
+// Obtener busqueda
+export const searchProduct = async ({ name, price, category }) => {
+  try {
+    const productsRef = db.collection('products');
 
-/*
-const __dirname = import.meta.dirname;
-const jsonPath = path.join(__dirname,"./products.json");
-const json = fs.readFileSync(jsonPath,"utf-8");
-const products= JSON.parse(json);
+    // Búsqueda por nombre en minúscula
+    let query = productsRef;
+    if (name) {
+      const nameLower = name.toLowerCase();
+      query = query
+        .where('name', '>=', nameLower)
+        .where('name', '<=', nameLower + '\uf8ff');
+    }
 
-export const getAllProducts = () =>{
-  return products;
-}
-export const getProductsById = (id) =>{
-  return products.find((p)=>p.id == id)
-}
-export const createProduct = (data)=>{
-  const newProduct = {
-    id: products.length + 1,
-    ...data
+    const snapshot = await query.get();
+
+    if (snapshot.empty) return false;
+
+    // Filtrado por precio y categoría
+    let results = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    // Filtrar por precio si se envió
+    if (price) {
+      results = results.filter(item => item.price == price); // == para evitar errores por tipo
+    }
+
+    // Filtrar por categoría si se envió
+    if (category) {
+      results = results.filter(item => 
+        item.categories && item.categories.includes(category.toLowerCase())
+      );
+    }
+    return results;
+
+  } catch (error) {
+    throw error
   }
-  products.push(newProduct);
-  fs.writeFileSync(jsonPath, JSON.stringify(products));
+};
+   
+// Obtener producto por ID
+export const getProductById = async (id) => {
+  try {
+    const doc = await db.collection('products').doc(id).get();
+    if (!doc.exists) return null;
+    return { id: doc.id, ...doc.data() };
+  } catch (error) {
+    throw error;
+  }
+};
+// Crear un producto
+export const createProduct = async (data) => {
+  try {
+    const docRef = await db.collection('products').add(data);
+    return { id: docRef.id, ...data };
+  } catch (error) {
+    throw error;
+  }
+};
+// Eliminar un producto
+export const deleteProduct = async (id) => {
+  try {
+    const doc = await db.collection('products').doc(id).get();
+    if (!doc.exists) return false;
 
-}
-export const deleteProduct = (id)=>{
-    const productIndex = products.findIndex((p)=> p.id === id);
-   if(productIndex === -1){
-    return null;
-   }else{
-        const product=products.splice(productIndex,1);
-  fs.writeFileSync(jsonPath, JSON.stringify(products));
-  return product;
-   }
-} */
+    await db.collection('products').doc(id).delete();
+    return { id, ...doc.data() };
+  } catch (error) {
+    throw error;
+  }
+};
+// Actualizar un producto
+export const updateProduct = async (id, data) => {
+  try {
+   
+    const docRef = db.collection('products').doc(id);
+    const doc = await docRef.get();
+
+    if (!doc.exists) return false;
+    await docRef.update(data);
+    const updatedDoc = await docRef.get();
+   
+    return { id: updatedDoc.id, ...updatedDoc.data() };
+   
+  } catch (error) {
+    throw error;
+  }
+};
