@@ -1,13 +1,8 @@
 import admin from 'firebase-admin';
-import dotenv from 'dotenv';
-import { readFile } from 'fs/promises';
-import  path  from 'path';
 
-dotenv.config();
-
-const serviceAccountPath = path.resolve("src/config/firebaseServiceAccount.json");
-
-const serviceAccount = JSON.parse(await readFile(serviceAccountPath, "utf8"));
+if(!admin.apps.length){
+ const serviceAccount = JSON.parce(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) 
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -15,4 +10,4 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-export { db };
+export default db;
