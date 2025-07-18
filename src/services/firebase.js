@@ -1,8 +1,7 @@
 import admin from 'firebase-admin';
-import dotenv from 'dotenv';
-dotenv.config();
+
 if(!admin.apps.length){
- const serviceAccount = JSON.parce(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) 
+ const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) 
 }
 
 admin.initializeApp({
@@ -11,4 +10,5 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-export default db;
+
+export { db };
