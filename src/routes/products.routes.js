@@ -1,7 +1,8 @@
 import {Router} from 'express';
-import { createProduct, deleteProduct, getAllProducts, getProdutById, searchProduct, updateProduct } from '../controllers/products.controllers.js';
-import { auth } from "../middlewares/auth.middleware.js";
 const router = Router();
+import { createProduct, deleteProduct, getAllProducts, getProdutById, searchProduct, updateProduct } from '../controllers/products.controllers.js';
+import  auth  from "../middlewares/auth.middlewares.js";
+
 
 //peticion Get/products, all products
 router.get("/products",getAllProducts);
