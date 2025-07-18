@@ -4,6 +4,7 @@ import { createProduct, deleteProduct, getAllProducts, getProdutById, searchProd
 import  auth  from "../middlewares/auth.middlewares.js";
 
 
+//router.get("/",getAllProducts);
 //peticion Get/products, all products
 router.get("/products",getAllProducts);
 //peticion Get/search

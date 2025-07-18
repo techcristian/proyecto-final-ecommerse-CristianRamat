@@ -1,10 +1,13 @@
 import express from 'express';
+import {Router} from 'express';
 import cors from 'cors';
+const router = Router();
 import authRouter from "./src/routes/auth.routes.js";
-import router from './src/routes/products.routes.js';
-
+import routerProducts from './src/routes/products.routes.js';
+import { getAllProducts } from './src/controllers/products.controllers.js';
 import dotenv from 'dotenv';
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -14,11 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //peticion Get
-app.get("/", (req, res) => {
-  res.json({ message: "Bienvenidos a la API REST ecommerse de NodeJS" });
-})
+router.get("/", getAllProducts)
+app.use("/", router); 
 //Rutas
-app.use("/api",router);
+app.use("/api",routerProducts);
 
 app.use("/api/auth", authRouter);
 
