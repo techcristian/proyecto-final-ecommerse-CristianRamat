@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
  const auth = (req, res, next) => {
-  const token = req.headers["authorization"]?.split(" ")[1];
+ try {
+   const token = req.headers["authorization"]?.split(" ")[1];
 
   if (!token) return res.sendStatus(401);
 
@@ -10,5 +11,8 @@ dotenv.config();
     if (err) return res.sendStatus(403);
     next();
   });
+ } catch (error) {
+  throw error
+ }
 };
 export default auth;

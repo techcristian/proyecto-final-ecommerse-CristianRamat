@@ -8,7 +8,8 @@ const default_user = {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
   const user = { id: 1, email };
 
@@ -20,5 +21,8 @@ export const login = async (req, res) => {
     res.json({ token });
   } else {
     res.sendStatus(401).json({error: 'Sus credenciales no coinciden ....'})
+  }
+  } catch (error) {
+    throw error
   }
 };
