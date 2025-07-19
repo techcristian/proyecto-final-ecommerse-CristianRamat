@@ -1,1 +1,21 @@
-.MD
+# 🛍️ Proyecto Final E-commerce Backend (Node.js + Firebase)
+
+Este es el backend de un proyecto final de E-commerce desarrollado con **Node.js** y **Firebase** como base de datos. El proyecto está desplegado en **Vercel** y expone una API que permite obtener productos de forma sencilla.
+
+### 🌐 URL del proyecto desplegado:
+🔗 [https://proyecto-final-ecommerse-node.vercel.app](https://proyecto-final-ecommerse-node.vercel.app)
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- Node.js
+- Express
+- Firebase Admin SDK
+- Vercel (para el deploy)
+- dotenv (variables de entorno)
+
+
+
+
+
