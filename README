@@ -1,7 +1,3 @@
-# 🛍️ Proyecto Final E-commerce Backend (Node.js + Firebase)
-
-Este es el backend de un proyecto final de E-commerce desarrollado con **Node.js** y **Firebase** como base de datos. El proyecto está desplegado en **Vercel** y expone una API que permite obtener productos de forma sencilla.
-
 ### 🌐 URL del proyecto desplegado:
 🔗 [https://proyecto-final-ecommerse-node.vercel.app](https://proyecto-final-ecommerse-node.vercel.app)
 
@@ -15,7 +11,84 @@ Este es el backend de un proyecto final de E-commerce desarrollado con **Node.js
 - Vercel (para el deploy)
 - dotenv (variables de entorno)
 
+---
+
+## 📂 Estructura del proyecto
+
+📦 proyecto-final-ecommerse-node
+ ├── src/
+      │ 
+      ├── controllers/
+      │     └── auth.Controller.js  
+      │      └── products.Controller.js 
+      ├── middlewares/
+      │     └── auth.middlewares.js 
+      ├── models/
+      │     └── products.model.js 
+      ├── routes/
+      │     └── productsRoutes.js 
+      ├── services/
+      │       └── firebase.js # Inicialización de Firebase
+      ├── .env # Variables de entorno (no se sube al repo)
+      ├── index.js # Punto de entrada de la app
+      ├── vercel.json # Configuración de Vercel
+      └── package.json # Dependencias
+
 
 ---
 
+## 📡 Endpoints disponibles
 
+### GET `/products`
+
+Retorna la lista de productos cargados en tu base de datos Firebase.
+
+📥 **Ejemplo de respuesta:**
+```json
+[
+  {
+    "id": "1",
+    "name": "Remera Negra Oversize",
+    "price": 35000,
+    "categories":["ropa","vestir"]
+  },
+
+]
+🔐 Variables de entorno
+agregar las siguientes variables en tu archivo .env o en el panel de Vercel:
+
+FIREBASE_TYPE=service_account
+FIREBASE_PROJECT_ID=xxxxxxxxxx
+FIREBASE_PRIVATE_KEY_ID=xxxxxxxxxx
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+FIREBASE_CLIENT_EMAIL=xxxxxxxxxx@xxxxxxxxxx.iam.gserviceaccount.com
+FIREBASE_CLIENT_ID=000000000000000000000
+FIREBASE_AUTH_URI=https://accounts.google.com/o/oauth2/auth
+FIREBASE_TOKEN_URI=https://oauth2.googleapis.com/token
+FIREBASE_AUTH_PROVIDER_X509_CERT_URL=https://www.googleapis.com/oauth2/v1/certs
+FIREBASE_CLIENT_X509_CERT_URL=https://www.googleapis.com/robot/v1/metadata/x509/xxxxxxxxxx.iam.gserviceaccount.com
+⚠️ Las claves privadas deben estar con los \n.
+
+🧪 Cómo correr el proyecto localmente
+Cloná el repositorio:
+
+bash
+
+git clone https://github.com/tu-usuario/proyecto-final-ecommerse-CristianRamat.git
+cd proyecto-final-ecommerse-node
+
+Instalá las dependencias:
+
+bash
+npm install
+Configurá el archivo .env con tus credenciales de Firebase.
+
+Ejecutá el servidor local:
+
+node index.js
+Accedé en tu navegador a: http://localhost:3000/products
+
+🧾 Créditos
+Desarrollado con 💻 por [Cristian Ramat].
+
+Este proyecto forma parte de un trabajo final de backend para prácticas educativas y personales.
