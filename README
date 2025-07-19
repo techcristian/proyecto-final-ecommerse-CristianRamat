@@ -74,9 +74,9 @@ Cloná el repositorio:
 
 bash
 
-git clone https://github.com/tu-usuario/proyecto-final-ecommerse-CristianRamat.git
-cd proyecto-final-ecommerse-node
+git clone https://github.com/techcristian/proyecto-final-ecommerse-CristianRamat.git
 
+cd proyecto-final-ecommerse-node
 Instalá las dependencias:
 
 bash
