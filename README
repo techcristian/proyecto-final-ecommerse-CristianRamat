@@ -20,13 +20,14 @@
       │ 
       ├── controllers/
       │     └── auth.Controller.js  
-      │      └── products.Controller.js 
+      │      └── products.controller.js 
       ├── middlewares/
       │     └── auth.middlewares.js 
       ├── models/
       │     └── products.model.js 
       ├── routes/
-      │     └── productsRoutes.js 
+      │      └── auth.routes.js 
+      │     └── products.routes.js 
       ├── services/
       │       └── firebase.js # Inicialización de Firebase
       ├── .env # Variables de entorno (no se sube al repo)
@@ -60,7 +61,7 @@ agregar las siguientes variables en tu archivo .env o en el panel de Vercel:
 FIREBASE_TYPE=service_account
 FIREBASE_PROJECT_ID=xxxxxxxxxx
 FIREBASE_PRIVATE_KEY_ID=xxxxxxxxxx
-FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n
 FIREBASE_CLIENT_EMAIL=xxxxxxxxxx@xxxxxxxxxx.iam.gserviceaccount.com
 FIREBASE_CLIENT_ID=000000000000000000000
 FIREBASE_AUTH_URI=https://accounts.google.com/o/oauth2/auth
